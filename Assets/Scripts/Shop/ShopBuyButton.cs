@@ -12,12 +12,12 @@ public class ShopBuyButton : MonoBehaviour
     [SerializeField] Image itemSprite;
     [SerializeField] Button button;
 
-    public void Setup(ItemData itemData, Action<int> onClickCallback)
+    public void Setup(ItemData itemData, Action<ItemData> onClickCallback)
     {
         itemName.text = itemData.ItemName;
         itemCost.text = itemData.ItemCost.ToString();
         itemSprite.sprite = itemData.ItemSprite;
 
-        button.onClick.AddListener(() => onClickCallback(1));
+        button.onClick.AddListener(() => onClickCallback(itemData));
     }
 }

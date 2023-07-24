@@ -1,35 +1,54 @@
 using UnityEngine;
-using UnityEngine.UI;
 
 public class Shop : MonoBehaviour
 {
-    [SerializeField] ItemsDataCollection itemsDataCollection;
+    [SerializeField] Canvas shopCanvas;
     [SerializeField] ShopBuyButton baseButtonPrefab;
     [SerializeField] Transform container;
 
-    void Start()
-    {
-        SetupShop();
-    }
+    PlayerMoney playerMoney;
 
-    void SetupShop()
+    int lastShopId;
+
+    public void Setup(PlayerMoney playerMoney, ItemData[] shopItemsOptions, int shopId)
     {
-        ItemData[] array = itemsDataCollection.GetAllItemsData();
-        for (int i = 0; i < array.Length; i++)
+        shopCanvas.enabled = true;
+        if (lastShopId == shopId) return;
+
+        ClearOldShopValues();
+        lastShopId = shopId;
+
+        this.playerMoney = playerMoney;
+
+        for (int i = 0; i < shopItemsOptions.Length; i++)
         {
             int id = i;
             ShopBuyButton shopBuyButton = Instantiate(baseButtonPrefab, container);
-            shopBuyButton.Setup(array[i], Buy);
+            shopBuyButton.Setup(shopItemsOptions[i], Buy);
         }
     }
 
-    public void Buy(int id)
+    public void CloseShop()
     {
-
+        shopCanvas.enabled = false;
+        GameManager.Instance.CloseShop();
     }
 
-    public void Sell()
+    public void ClearOldShopValues()
     {
+        for (int i = container.childCount - 1; i >= 0; i--)
+        {
+            Destroy(container.GetChild(0).gameObject);
+        }
+    }
 
+    public void Buy(ItemData itemData)
+    {
+        playerMoney.SpendMoney(itemData.ItemCost);
+    }
+
+    public void Sell(ItemData itemData)
+    {
+        playerMoney.AddMoney(itemData.ItemCost);
     }
 }

@@ -1,16 +1,6 @@
 using UnityEngine;
 
-public class Npc : MonoBehaviour, IInteractable
+public abstract class Npc : MonoBehaviour
 {
-    public Canvas npcCanvas;
 
-    public void StartInteraction()
-    {
-        UIHandler.PresentUI(npcCanvas);
-    }
-
-    public void StopInteraction()
-    {
-        
-    }
 }
