@@ -4,7 +4,8 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] ItemsDataCollection allGameItems;
-    [SerializeField] Shop shop;
+    [SerializeField] ShopUI shopUI;
+    [SerializeField] PlayerUI playerUI;
 
     PlayerMoney playerMoney;
     PlayerInventory playerInventory;
@@ -25,20 +26,29 @@ public class GameManager : Singleton<GameManager>
         gameState = GameState.Running;
         playerMoney = new PlayerMoney(1000);
         playerInventory = new PlayerInventory(new List<ItemData>());
+
+        playerUI.Setup(playerMoney, playerInventory);
+        shopUI.Setup(playerMoney, playerInventory);
     }
 
-    public static void ChangeGameSimulation(GameState newState)
+    void Start()
     {
-        gameState = newState;
+        playerMoney.BindListenerToMoneyUpdate(playerUI.UpdateMoney);
+        playerMoney.RefreshListeners();
     }
 
     public void ShowShop(ItemData[] shopItems, int shopId)
     {
-        shop.Setup(playerMoney, shopItems, shopId);
+        shopUI.PresentShopUI(shopItems, shopId, CloseShop);
     }
 
     public void CloseShop()
     {
         gameState = GameState.Running;
+    }
+
+    public void ShowPlayerUI()
+    {
+
     }
 }
