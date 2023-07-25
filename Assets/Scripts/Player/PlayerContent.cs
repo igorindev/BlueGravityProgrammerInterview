@@ -23,7 +23,7 @@ public class PlayerMoney
         private set
         {
             money = value;
-            onMoneyUpdated.Invoke(money);
+            onMoneyUpdated?.Invoke(money);
         }
     }
 
@@ -56,31 +56,25 @@ public class PlayerMoney
 
 public class PlayerInventory
 {
-    public Action<List<ItemData>> onInventoryUpdated;
+    Action<List<ItemData>> onInventoryUpdated;
 
-    List<ItemData> currentItems;
-    public List<ItemData> CurrentItems
-    {
-        get => currentItems;
-        private set
-        {
-            currentItems = value;
-            onInventoryUpdated.Invoke(currentItems);
-        }
-    }
+    readonly List<ItemData> currentItems = new List<ItemData>(27);
+    public List<ItemData> CurrentItems => currentItems;
 
     public PlayerInventory(List<ItemData> items)
     {
-        currentItems = items;
+        currentItems.AddRange(items);
     }
 
     public void AddItemToInventory(ItemData itemData)
     {
         currentItems.Add(itemData);
+        onInventoryUpdated?.Invoke(currentItems);
     }
 
     public void RemoveItemFromInventory(ItemData itemData)
     {
         currentItems.Remove(itemData);
+        onInventoryUpdated?.Invoke(currentItems);
     }
 }

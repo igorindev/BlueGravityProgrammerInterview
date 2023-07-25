@@ -3,8 +3,11 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 5.0f;
+    [SerializeField] Animator animator;
 
     Rigidbody2D playerRigidbody;
+
+    readonly int animSpeed = Animator.StringToHash("Speed");
 
     void Start()
     {
@@ -14,6 +17,7 @@ public class PlayerMovement : MonoBehaviour
     void FixedUpdate()
     {
         MovePlayer();
+        animator.SetFloat(animSpeed, playerRigidbody.velocity.magnitude);
     }
 
     void MovePlayer()
