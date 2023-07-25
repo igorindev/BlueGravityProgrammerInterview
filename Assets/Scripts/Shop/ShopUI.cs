@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 
 public class ShopUI : GameUI
@@ -8,15 +7,10 @@ public class ShopUI : GameUI
 
     int lastShopId;
 
-    Action onCloseUI;
-
     ItemData[] currentShopItemsOptions;
 
-    public void PresentShopUI(ItemData[] shopItemsOptions, int shopId, Action onCloseUICallback)
+    public void SetupShopUI(ItemData[] shopItemsOptions, int shopId)
     {
-        onCloseUI = onCloseUICallback;
-
-        SetCanvasActive(true);
         if (lastShopId == shopId) return;
 
         ClearOldShopValues();
@@ -31,12 +25,6 @@ public class ShopUI : GameUI
             bool canBuy = playerMoney.HasEnoughMoney(shopItemsOptions[i].ItemCost);
             shopBuyButton.Setup(shopItemsOptions[i], canBuy, Buy);
         }
-    }
-
-    public void CloseShop()
-    {
-        SetCanvasActive(false);
-        onCloseUI.Invoke();
     }
 
     public void ClearOldShopValues()

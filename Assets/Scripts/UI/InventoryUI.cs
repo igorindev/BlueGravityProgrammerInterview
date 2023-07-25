@@ -4,12 +4,11 @@ using UnityEngine.UI;
 public class InventoryUI : GameUI
 {
     [SerializeField] CharacterCustomization customizations;
-    [SerializeField] Image[] inventory;
     [SerializeField] Sprite emptySprite;
+    [SerializeField] Image[] inventory;
 
     public void SetupInventory()
     {
-        SetCanvasActive(true);
         for (int i = 0; i < playerInventory.CurrentItems.Capacity; i++)
         {
             inventory[i].GetComponent<Button>().onClick.RemoveAllListeners();
@@ -24,11 +23,6 @@ public class InventoryUI : GameUI
                 inventory[i].sprite = emptySprite;
             }
         }
-    }
-
-    public void CloseInventory()
-    {
-        SetCanvasActive(false);
     }
 
     void SetValue(ItemData itemData)

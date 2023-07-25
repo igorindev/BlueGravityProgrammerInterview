@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-public class PlayerMouseInteraction : MonoBehaviour
+public class PlayerMouseInteraction : MonoBehaviour, IInput
 {
     readonly RaycastHit2D[] hitResults = new RaycastHit2D[1];
 
@@ -73,7 +72,7 @@ public class PlayerMouseInteraction : MonoBehaviour
 
         SetInteractionPresentationActive(isInteractable);
         SetInteractionPresentationInRange(isInRange);
-        return isInteractable;
+        return isInteractable && isInRange;
     }
 
     void Interact()

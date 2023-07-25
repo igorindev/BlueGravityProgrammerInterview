@@ -9,6 +9,8 @@ public class PlayerMovement : MonoBehaviour
 
     readonly int animSpeed = Animator.StringToHash("Speed");
 
+    Vector2 movementInput;
+
     void Start()
     {
         playerRigidbody = GetComponent<Rigidbody2D>();
@@ -22,7 +24,11 @@ public class PlayerMovement : MonoBehaviour
 
     void MovePlayer()
     {
-        Vector2 horizontalInput = Input.GetAxisRaw("Horizontal") * Vector2.right + Input.GetAxisRaw("Vertical") * Vector2.up;
-        playerRigidbody.velocity = horizontalInput.normalized * playerSpeed;
+        playerRigidbody.velocity = movementInput.normalized * playerSpeed;
+    }
+
+    public void SendInput(Vector2 input)
+    {
+        movementInput = input.x * Vector2.right + input.y * Vector2.up;
     }
 }

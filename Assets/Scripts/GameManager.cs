@@ -4,10 +4,16 @@ using UnityEngine;
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] ItemsDataCollection allGameItems;
+
+    [Header("UI")]
     [SerializeField] ShopUI shopUI;
     [SerializeField] PlayerUI playerUI;
     [SerializeField] InventoryUI inventoryUI;
-    [SerializeField] PlayerMouseInteraction playerInput;
+    [SerializeField] PauseUI pauseUI;
+
+    [Header("Player")]
+    [SerializeField] PlayerMouseInteraction playerMouse;
+    [SerializeField] PlayerInput playerInput;
     [SerializeField] Transform playerTransform;
 
     PlayerMoney playerMoney;
@@ -33,6 +39,7 @@ public class GameManager : Singleton<GameManager>
         playerUI.Setup(playerMoney, playerInventory);
         shopUI.Setup(playerMoney, playerInventory);
         inventoryUI.Setup(playerMoney, playerInventory);
+        playerMouse.Setup(playerTransform);
         playerInput.Setup(playerTransform);
     }
 
@@ -44,21 +51,33 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowShop(ItemData[] shopItems, int shopId)
     {
-        shopUI.PresentShopUI(shopItems, shopId, CloseShop);
-        playerInput.InputEnable = false;
+        shopUI.SetupShopUI(shopItems, shopId);
+        shopUI.PresentUICanvas(RestorePlayerInput);
+        DisablePlayerInput();
     }
 
-    public void CloseShop()
+    public void ShowPlayerInventory() //Unity Event
     {
+        inventoryUI.PresentUICanvas(RestorePlayerInput);
+        inventoryUI.SetupInventory();
+        DisablePlayerInput();
+    }
+
+    public void ShowPauseGame() //Unity Event
+    {
+        pauseUI.PresentUICanvas(RestorePlayerInput);
+        DisablePlayerInput();
+    }
+
+    void RestorePlayerInput()
+    {
+        playerMouse.InputEnable = true;
         playerInput.InputEnable = true;
     }
 
-    public void ShowPlayerUI()
+    void DisablePlayerInput()
     {
-
-    }
-    public void ShowPlayerInventory()
-    {
-        inventoryUI.SetupInventory();
+        playerMouse.InputEnable = false;
+        playerInput.InputEnable = false;
     }
 }
