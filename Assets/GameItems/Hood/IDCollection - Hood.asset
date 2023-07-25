@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: bcd3c50ae63c66c4ab1eec6e534c3d8e, type: 2}
   spritePath: Assets/GameItems/Hood/Sprites
   savePath: Assets/GameItems/Hood
+  itemType: 1

@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 1c9bc39ffce8d8740998b2906857bb5e, type: 2}
   spritePath: Assets/GameItems/Pelvis/Sprites
   savePath: Assets/GameItems/Pelvis
+  itemType: 2

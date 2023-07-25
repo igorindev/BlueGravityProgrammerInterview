@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: Rogue_torso_04
   itemSprite: {fileID: 21300000, guid: 3d9056df586b6024fbc5b9fee2433eef, type: 3}
   itemCost: 50
+  itemType: 3

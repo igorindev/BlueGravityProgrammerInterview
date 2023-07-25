@@ -21,3 +21,4 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 265b78a9fcc9e1a45b9caf51405feb5f, type: 2}
   spritePath: Assets/GameItems/Torso/Sprites
   savePath: Assets/GameItems/Torso
+  itemType: 3

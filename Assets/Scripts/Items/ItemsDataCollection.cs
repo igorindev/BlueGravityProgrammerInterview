@@ -19,6 +19,7 @@ public class ItemsDataCollection : ScriptableObject
     [Header("Collection Path")]
     public string spritePath;
     public string savePath;
+    public ItemData.ItemType itemType;
 
     [ContextMenu("Get All Items At Path")]
     public void GetAllItems()
@@ -46,7 +47,7 @@ public class ItemsDataCollection : ScriptableObject
         for (int i = 0; i < sprite.Length; i++)
         {
             ItemData itemData = CreateInstance(typeof(ItemData)) as ItemData;
-            itemData.SetupAllItemDataValues(sprite[i].name, sprite[i], 50);
+            itemData.SetupAllItemDataValues(sprite[i].name, sprite[i], 50, itemType);
 
             AssetDatabase.CreateAsset(itemData, $"{savePath}/{sprite[i].name}.asset");
             AssetDatabase.SaveAssets();
