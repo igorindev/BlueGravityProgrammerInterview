@@ -11,12 +11,8 @@ public class ShopBuyButton : MonoBehaviour
     [SerializeField] Image itemSprite;
     [SerializeField] Button button;
 
-    ItemData itemData;
-
     public void Setup(ItemData itemData, bool canBuy, Action<ItemData> onClickCallback)
     {
-        this.itemData = itemData;
-
         itemName.text = itemData.ItemName;
         itemCost.text = itemData.ItemCost.ToString();
         itemCost.color = canBuy ? Color.black : Color.red;

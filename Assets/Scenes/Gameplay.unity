@@ -1380,7 +1380,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.6467, y: 1114722.9}
+  m_AnchoredPosition: {x: 5.6467, y: 1171879.1}
   m_SizeDelta: {x: -10.1641, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &758936458
@@ -1423,6 +1423,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 0
   m_VerticalFit: 2
+--- !u!114 &869957448 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 7458212410376591034, guid: 57a03609442971c4788079c5ddc6442b, type: 3}
+  m_PrefabInstance: {fileID: 7458212411119659506}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a3517bf6f9fd9d418eeed61dc36b2fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &897133174
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,6 +2259,7 @@ MonoBehaviour:
   allGameItems: {fileID: 11400000, guid: b0e2da5e70740ad4ebc19fcd6cbd0919, type: 2}
   shopUI: {fileID: 72580159}
   playerUI: {fileID: 1474503791}
+  playerInput: {fileID: 869957448}
 --- !u!4 &1347642598 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6825251700852818321, guid: 0f4a1265891944347a4e1eaba090d4b8, type: 3}
@@ -6683,10 +6695,6 @@ PrefabInstance:
       propertyPath: camera
       value: 
       objectReference: {fileID: 519420031}
-    - target: {fileID: 7458212410376591034, guid: 57a03609442971c4788079c5ddc6442b, type: 3}
-      propertyPath: LayerMask.m_Bits
-      value: 96
-      objectReference: {fileID: 0}
     - target: {fileID: 7458212410376591034, guid: 57a03609442971c4788079c5ddc6442b, type: 3}
       propertyPath: mouseInteractionPresentationReference
       value: 

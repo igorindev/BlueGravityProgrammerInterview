@@ -6,6 +6,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] ItemsDataCollection allGameItems;
     [SerializeField] ShopUI shopUI;
     [SerializeField] PlayerUI playerUI;
+    [SerializeField] PlayerMouseInteraction playerInput;
 
     PlayerMoney playerMoney;
     PlayerInventory playerInventory;
@@ -40,11 +41,12 @@ public class GameManager : Singleton<GameManager>
     public void ShowShop(ItemData[] shopItems, int shopId)
     {
         shopUI.PresentShopUI(shopItems, shopId, CloseShop);
+        playerInput.InputEnable = false;
     }
 
     public void CloseShop()
     {
-        gameState = GameState.Running;
+        playerInput.InputEnable = true;
     }
 
     public void ShowPlayerUI()

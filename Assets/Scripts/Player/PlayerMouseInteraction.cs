@@ -8,8 +8,25 @@ public class PlayerMouseInteraction : MonoBehaviour
     [SerializeField] new Camera camera;
     [SerializeField] LayerMask LayerMask;
 
+    Transform playerTransform;
+
     IMouseInteractionPresentation mouseInteractionPresentation;
     IInteractable currentInteraction;
+
+    bool inputEnable = true;
+
+    public bool InputEnable
+    {
+        get => inputEnable;
+        set
+        {
+            inputEnable = value;
+            if (!value)
+            {
+                SetInteractionPresentationActive(false);
+            }
+        }
+    }
 
     void Start()
     {
@@ -18,6 +35,8 @@ public class PlayerMouseInteraction : MonoBehaviour
 
     void Update()
     {
+        if (!InputEnable) { return; }
+
         if (TryFindInteractableEntity())
         {
             if (Input.GetMouseButtonDown(0))
@@ -56,8 +75,9 @@ public class PlayerMouseInteraction : MonoBehaviour
     {
         mouseInteractionPresentation.SetActive(value);
     }
+
     void SetInteractionPresentationInRangeActive(bool value)
     {
-        
+
     }
 }
