@@ -4,6 +4,7 @@ using UnityEngine.UI;
 public interface IMouseInteractionPresentation
 {
     public void SetActive(bool value);
+    public void SetInteractive(bool isInRange);
 }
 
 public class MouseInteractionPresentation : MonoBehaviour, IMouseInteractionPresentation
@@ -38,5 +39,10 @@ public class MouseInteractionPresentation : MonoBehaviour, IMouseInteractionPres
     public void SetActive(bool value)
     {
         interactionIcon.enabled = value;
+    }
+
+    public void SetInteractive(bool isInRange)
+    {
+        interactionIcon.color = isInRange ? Color.white : new Color(1, 1, 1, 0.5f);
     }
 }

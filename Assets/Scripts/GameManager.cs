@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] PlayerUI playerUI;
     [SerializeField] InventoryUI inventoryUI;
     [SerializeField] PlayerMouseInteraction playerInput;
+    [SerializeField] Transform playerTransform;
 
     PlayerMoney playerMoney;
     PlayerInventory playerInventory;
@@ -32,6 +33,7 @@ public class GameManager : Singleton<GameManager>
         playerUI.Setup(playerMoney, playerInventory);
         shopUI.Setup(playerMoney, playerInventory);
         inventoryUI.Setup(playerMoney, playerInventory);
+        playerInput.Setup(playerTransform);
     }
 
     void Start()

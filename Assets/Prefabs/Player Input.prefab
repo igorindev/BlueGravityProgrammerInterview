@@ -49,3 +49,4 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 64
+  cellDistanceToEnableInput: 2

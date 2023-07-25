@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class PlayerMouseInteraction : MonoBehaviour
@@ -7,6 +8,7 @@ public class PlayerMouseInteraction : MonoBehaviour
     [SerializeField] Transform mouseInteractionPresentationReference;
     [SerializeField] new Camera camera;
     [SerializeField] LayerMask LayerMask;
+    [SerializeField] float cellDistanceToEnableInput;
 
     Transform playerTransform;
 
@@ -26,6 +28,11 @@ public class PlayerMouseInteraction : MonoBehaviour
                 SetInteractionPresentationActive(false);
             }
         }
+    }
+
+    public void Setup(Transform playerTransform)
+    {
+        this.playerTransform = playerTransform;
     }
 
     void Start()
@@ -52,9 +59,11 @@ public class PlayerMouseInteraction : MonoBehaviour
         int value = Physics2D.GetRayIntersectionNonAlloc(ray, hitResults, Mathf.Infinity, LayerMask);
 
         bool isInteractable = false;
+        bool isInRange = false;
         if (value > 0)
         {
             isInteractable = hitResults[0].collider.TryGetComponent(out IInteractable interactable);
+            isInRange = (playerTransform.position - hitResults[0].transform.position).sqrMagnitude <= cellDistanceToEnableInput * cellDistanceToEnableInput;
             currentInteraction = interactable;
         }
         else
@@ -63,6 +72,7 @@ public class PlayerMouseInteraction : MonoBehaviour
         }
 
         SetInteractionPresentationActive(isInteractable);
+        SetInteractionPresentationInRange(isInRange);
         return isInteractable;
     }
 
@@ -76,8 +86,8 @@ public class PlayerMouseInteraction : MonoBehaviour
         mouseInteractionPresentation.SetActive(value);
     }
 
-    void SetInteractionPresentationInRangeActive(bool value)
+    void SetInteractionPresentationInRange(bool value)
     {
-
+        mouseInteractionPresentation.SetInteractive(value);
     }
 }
