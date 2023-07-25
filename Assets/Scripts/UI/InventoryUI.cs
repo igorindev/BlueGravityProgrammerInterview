@@ -7,6 +7,12 @@ public class InventoryUI : GameUI
     [SerializeField] Sprite emptySprite;
     [SerializeField] Image[] inventory;
 
+    [Header("Portrait")]
+    [SerializeField] Image face;
+    [SerializeField] Image hood;
+    [SerializeField] Image pelvis;
+    [SerializeField] Image torso;
+
     public void SetupInventory()
     {
         for (int i = 0; i < playerInventory.CurrentItems.Capacity; i++)
@@ -27,6 +33,24 @@ public class InventoryUI : GameUI
 
     void SetValue(ItemData itemData)
     {
-        customizations.SetFace(itemData.ItemSprite);
+        switch (itemData.ItemDataType)
+        {
+            case ItemData.ItemType.Face:
+                customizations.SetFace(itemData.ItemSprite);
+                face.sprite = itemData.ItemSprite;
+                break;
+            case ItemData.ItemType.Hood:
+                customizations.SetHood(itemData.ItemSprite);
+                hood.sprite = itemData.ItemSprite;
+                break;
+            case ItemData.ItemType.Pelvis:
+                customizations.SetPelvis(itemData.ItemSprite);
+                pelvis.sprite = itemData.ItemSprite;
+                break;
+            case ItemData.ItemType.Torso:
+                customizations.SetTorso(itemData.ItemSprite);
+                torso.sprite = itemData.ItemSprite;
+                break;
+        }
     }
 }
