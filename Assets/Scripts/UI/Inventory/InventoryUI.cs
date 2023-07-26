@@ -1,4 +1,5 @@
 using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -67,7 +68,7 @@ public class InventoryUI : GameUI
         SetupInventoryWithCustomAction(SetSkin);
     }
 
-    public void SetupInventoryWithCustomAction(Action<ItemInstance> action)
+    public void SetupInventoryWithCustomAction(Action<ItemInstance> action, ItemData.ItemType itemTypeFilter = ItemData.ItemType.None)
     {
         for (int i = 0; i < inventoryGrid.Length; i++)
         {
@@ -77,12 +78,21 @@ public class InventoryUI : GameUI
             {
                 int id = i;
                 inventoryGrid[i].sprite = playerInventory.Items[i].itemData.ItemSprite;
+                inventoryGrid[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = playerInventory.Items[i].itemData.ItemCost + "<color=yellow>$</color>";
+
                 button.interactable = !playerInventory.Items[i].equipped;
+                if (button.interactable && itemTypeFilter != ItemData.ItemType.None)
+                {
+                    button.interactable = playerInventory.Items[i].itemData.ItemDataType == itemTypeFilter;
+                }
+
                 button.onClick.AddListener(() => action(playerInventory.Items[id]));
             }
             else
             {
+                gridButtons[i].interactable = true;
                 inventoryGrid[i].sprite = emptySprite;
+                inventoryGrid[i].transform.GetComponentInChildren<TextMeshProUGUI>().text = "0<color=yellow>$</color>";
             }
         }
     }
@@ -97,7 +107,7 @@ public class InventoryUI : GameUI
             }
             else
             {
-                gridButtons[i].interactable = false;
+                gridButtons[i].interactable = true;
             }
         }
     }

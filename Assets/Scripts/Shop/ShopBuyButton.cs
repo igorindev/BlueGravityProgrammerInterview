@@ -19,7 +19,7 @@ public class ShopBuyButton : MonoBehaviour
         ItemData itemData = currentItemInstance.itemData;
 
         itemName.text = itemData.ItemName;
-        itemCost.text = itemData.ItemCost.ToString();
+        itemCost.text = itemData.ItemCost.ToString() + " <color=yellow>$</color>";
         itemCost.color = canBuy ? Color.black : Color.red;
         itemSprite.sprite = itemData.ItemSprite;
 

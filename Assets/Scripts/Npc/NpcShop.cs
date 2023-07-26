@@ -3,20 +3,22 @@ using UnityEngine;
 
 public class NpcShop : Npc, IInteractable
 {
-    [SerializeField] ItemsDataCollection globalItems;
+    [SerializeField] ItemsDataCollection itemsCollection;
     [SerializeField] List<ItemInstance> itemsSoldByThisNPC;
 
-    Vector2Int itemsRangeToSell = new Vector2Int(4, 8);
+    public ItemData.ItemType NpcShopType => itemsCollection.ItemType;
 
     void Start()
     {
-        int quantityToSell = Random.Range(itemsRangeToSell.x, itemsRangeToSell.y);
+        int quantityToSell = Random.Range(4, itemsCollection.ItemsCount);
         itemsSoldByThisNPC = new List<ItemInstance>(quantityToSell);
-        for (int i = 0; i < quantityToSell; i++)
+
+        ItemData[] items = itemsCollection.GetAllItemsData();
+        for (int i = 0; i < items.Length; i++)
         {
             ItemInstance itemInstance = new ItemInstance()
             {
-                itemData = globalItems.GetRandomItem(),
+                itemData = items[i],
             };
 
             itemsSoldByThisNPC.Add(itemInstance);

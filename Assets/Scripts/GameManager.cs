@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using UnityEngine;
-using static PlayerInventory;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -35,7 +34,7 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         gameState = GameState.Running;
-        playerMoney = new PlayerMoney(600);
+        playerMoney = new PlayerMoney(850);
         playerInventory = new PlayerInventory(initialInventory.GetAllItemsData());
 
         playerUI.Setup(playerMoney, playerInventory);
@@ -54,8 +53,8 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowShop(NpcShop npcShop, List<ItemInstance> shopItems)
     {
-        shopUI.SetupShopUI(npcShop, shopItems, inventoryUI);
         shopUI.PresentUICanvas(RestorePlayerInput);
+        shopUI.SetupShopUI(npcShop, shopItems, inventoryUI);
         DisablePlayerInput();
     }
 

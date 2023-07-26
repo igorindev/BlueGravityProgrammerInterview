@@ -10,6 +10,7 @@ public class ItemData : ScriptableObject
 
     public enum ItemType
     {
+        None,
         Face,
         Hood,
         Pelvis,

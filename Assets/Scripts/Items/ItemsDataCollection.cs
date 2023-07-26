@@ -8,7 +8,12 @@ using UnityEngine;
 [CreateAssetMenu()]
 public class ItemsDataCollection : ScriptableObject
 {
-    [SerializeField] ItemData[] itemsData;
+    [SerializeField] ItemData[] itemsData = new ItemData[0];
+    [SerializeField] ItemData.ItemType itemType;
+
+    public int ItemsCount => itemsData.Length;
+
+    public ItemData.ItemType ItemType { get => itemType; }
 
     public ItemData[] GetAllItemsData()
     {
@@ -24,7 +29,6 @@ public class ItemsDataCollection : ScriptableObject
     [Header("Collection Path")]
     [SerializeField] string spritePath;
     [SerializeField] string savePath;
-    [SerializeField] ItemData.ItemType itemType;
 
     [ContextMenu("Get All Items At Path")]
     void GetAllItems()

@@ -21,6 +21,8 @@ public class ShopUI : GameUI
         currentShopItemsOptions = shopItemsOptions;
 
         RefreshCurrentItems();
+
+        inventoryUI.MoveInventoryUIGrid(transformGrid);
         SetupInventoryToSell();
     }
 
@@ -52,7 +54,7 @@ public class ShopUI : GameUI
             currentNpc.RemoveItemFromNpc(itemInstance);
             playerMoney.SpendMoney(itemInstance.itemData.ItemCost);
             RefreshCurrentItems();
-            inventoryUI.SetupInventoryWithCustomAction(Sell);
+            SetupInventoryToSell();
         }
         else
         {
@@ -73,18 +75,17 @@ public class ShopUI : GameUI
         return null;
     }
 
-    void SetupInventoryToSell()
-    {
-        inventoryUI.MoveInventoryUIGrid(transformGrid);
-        inventoryUI.SetupInventoryWithCustomAction(Sell);
-    }
-
     public void Sell(ItemInstance itemInstance)
     {
         playerMoney.AddMoney(itemInstance.itemData.ItemCost);
         playerInventory.RemoveItemFromInventory(itemInstance);
         currentNpc.AddItemToNpc(itemInstance);
-        inventoryUI.SetupInventoryWithCustomAction(Sell);
         RefreshCurrentItems();
+        SetupInventoryToSell();
+    }
+
+    void SetupInventoryToSell()
+    {
+        inventoryUI.SetupInventoryWithCustomAction(Sell, currentNpc.NpcShopType);
     }
 }
