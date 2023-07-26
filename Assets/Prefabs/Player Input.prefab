@@ -50,7 +50,7 @@ MonoBehaviour:
   LayerMask:
     serializedVersion: 2
     m_Bits: 64
-  cellDistanceToEnableInput: 2
+  cellDistanceToEnableInput: 2.3
 --- !u!114 &4138906502801132561
 MonoBehaviour:
   m_ObjectHideFlags: 0
