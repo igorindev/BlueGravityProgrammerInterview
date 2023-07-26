@@ -78,7 +78,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 83c42af37ad5ac341b07a24543084073, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemsSoldByThisNPC: {fileID: 11400000, guid: b0e2da5e70740ad4ebc19fcd6cbd0919, type: 2}
+  globalItems: {fileID: 11400000, guid: b494c8e333511204a87ac00ff042a788, type: 2}
 --- !u!61 &63524341093440967
 BoxCollider2D:
   m_ObjectHideFlags: 0

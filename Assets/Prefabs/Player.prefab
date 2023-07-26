@@ -207,6 +207,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSpeed: 3
   animator: {fileID: 7815741556851908362}
+  mesh: {fileID: 556961897078521422}
 --- !u!114 &2417191359798254858
 MonoBehaviour:
   m_ObjectHideFlags: 0

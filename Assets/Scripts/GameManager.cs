@@ -1,9 +1,11 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static PlayerInventory;
 
 public class GameManager : Singleton<GameManager>
 {
     [SerializeField] ItemsDataCollection allGameItems;
+    [SerializeField] ItemsDataCollection initialInventory;
 
     [Header("UI")]
     [SerializeField] ShopUI shopUI;
@@ -33,12 +35,13 @@ public class GameManager : Singleton<GameManager>
         base.Awake();
 
         gameState = GameState.Running;
-        playerMoney = new PlayerMoney(1000);
-        playerInventory = new PlayerInventory(new List<ItemData>());
+        playerMoney = new PlayerMoney(600);
+        playerInventory = new PlayerInventory(initialInventory.GetAllItemsData());
 
         playerUI.Setup(playerMoney, playerInventory);
         shopUI.Setup(playerMoney, playerInventory);
         inventoryUI.Setup(playerMoney, playerInventory);
+        inventoryUI.Initialize();
         playerMouse.Setup(playerTransform);
         playerInput.Setup(playerTransform);
     }
@@ -49,9 +52,9 @@ public class GameManager : Singleton<GameManager>
         playerMoney.RefreshListeners();
     }
 
-    public void ShowShop(ItemData[] shopItems, int shopId)
+    public void ShowShop(NpcShop npcShop, List<ItemInstance> shopItems)
     {
-        shopUI.SetupShopUI(shopItems, shopId);
+        shopUI.SetupShopUI(npcShop, shopItems);
         shopUI.PresentUICanvas(RestorePlayerInput);
         DisablePlayerInput();
     }

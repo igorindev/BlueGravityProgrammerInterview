@@ -1,62 +1,75 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ShopUI : GameUI
 {
-    [SerializeField] ShopBuyButton baseButtonPrefab;
-    [SerializeField] Transform container;
+    [SerializeField] ShopBuyButton[] shopBuyButtons;
 
-    int lastShopId;
+    List<ItemInstance> currentShopItemsOptions;
 
-    ItemData[] currentShopItemsOptions;
+    NpcShop currentNpc;
 
-    public void SetupShopUI(ItemData[] shopItemsOptions, int shopId)
+    public void SetupShopUI(NpcShop npcShop, List<ItemInstance> shopItemsOptions)
     {
-        if (lastShopId == shopId) return;
-
-        ClearOldShopValues();
-        lastShopId = shopId;
+        currentNpc = npcShop;
 
         currentShopItemsOptions = shopItemsOptions;
-
-        for (int i = 0; i < shopItemsOptions.Length; i++)
-        {
-            int id = i;
-            ShopBuyButton shopBuyButton = Instantiate(baseButtonPrefab, container);
-            bool canBuy = playerMoney.HasEnoughMoney(shopItemsOptions[i].ItemCost);
-            shopBuyButton.Setup(shopItemsOptions[i], canBuy, Buy);
-        }
-    }
-
-    public void ClearOldShopValues()
-    {
-        for (int i = container.childCount - 1; i >= 0; i--)
-        {
-            Destroy(container.GetChild(i).gameObject);
-        }
-    }
-
-    void RefreshCurrentItems()
-    {
-        for (int i = 0; i < container.childCount; i++)
-        {
-            int id = i;
-            ShopBuyButton shopBuyButton = container.GetChild(i).GetComponent<ShopBuyButton>();
-            bool canBuy = playerMoney.HasEnoughMoney(currentShopItemsOptions[i].ItemCost);
-            shopBuyButton.Setup(currentShopItemsOptions[i], canBuy, Buy);
-        }
-    }
-
-    public void Buy(ItemData itemData)
-    {
-        playerMoney.SpendMoney(itemData.ItemCost);
-        playerInventory.AddItemToInventory(itemData);
 
         RefreshCurrentItems();
     }
 
-    public void Sell(ItemData itemData)
+    void RefreshCurrentItems()
     {
-        playerMoney.AddMoney(itemData.ItemCost);
-        playerInventory.RemoveItemFromInventory(itemData);
+        for (int i = 0; i < shopBuyButtons.Length; i++)
+        {
+            if (i < currentShopItemsOptions.Count)
+            {
+                if (!shopBuyButtons[i].gameObject.activeSelf)
+                    shopBuyButtons[i].gameObject.SetActive(true);
+
+                ShopBuyButton shopBuyButton = shopBuyButtons[i];
+                bool canBuy = playerMoney.HasEnoughMoney(currentShopItemsOptions[i].itemData.ItemCost);
+                shopBuyButton.Setup(currentShopItemsOptions[i], canBuy, Buy);
+            }
+            else
+            {
+                shopBuyButtons[i].gameObject.SetActive(false);
+            }
+        }
+    }
+
+    public void Buy(ItemInstance itemInstance)
+    {
+        if (playerInventory.AddItemToInventory(itemInstance))
+        {
+            GetButtonWithItem(itemInstance).gameObject.SetActive(false);
+            currentNpc.RemoveItemFromNpc(itemInstance);
+            playerMoney.SpendMoney(itemInstance.itemData.ItemCost);
+            RefreshCurrentItems();
+        }
+        else
+        {
+            //Inventory is full
+        }
+    }
+
+    ShopBuyButton GetButtonWithItem(ItemInstance itemInstance)
+    {
+        for (int i = 0; i < shopBuyButtons.Length; i++)
+        {
+            if (shopBuyButtons[i].CheckItemReference(itemInstance))
+            {
+                return shopBuyButtons[i];
+            }
+        }
+
+        return null;
+    }
+
+    public void Sell(ItemInstance itemInstance)
+    {
+        playerMoney.AddMoney(itemInstance.itemData.ItemCost);
+        playerInventory.RemoveItemFromInventory(itemInstance);
+        currentNpc.AddItemToNpc(itemInstance);
     }
 }

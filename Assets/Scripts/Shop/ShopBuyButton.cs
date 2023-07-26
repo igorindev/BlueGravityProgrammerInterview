@@ -11,8 +11,13 @@ public class ShopBuyButton : MonoBehaviour
     [SerializeField] Image itemSprite;
     [SerializeField] Button button;
 
-    public void Setup(ItemData itemData, bool canBuy, Action<ItemData> onClickCallback)
+    ItemInstance currentItemInstance;
+
+    public void Setup(ItemInstance itemInstance, bool canBuy, Action<ItemInstance> onClickCallback)
     {
+        currentItemInstance = itemInstance;
+        ItemData itemData = currentItemInstance.itemData;
+
         itemName.text = itemData.ItemName;
         itemCost.text = itemData.ItemCost.ToString();
         itemCost.color = canBuy ? Color.black : Color.red;
@@ -20,6 +25,11 @@ public class ShopBuyButton : MonoBehaviour
 
         button.interactable = canBuy;
         button.onClick.RemoveAllListeners();
-        button.onClick.AddListener(() => onClickCallback(itemData));
+        button.onClick.AddListener(() => onClickCallback(itemInstance));
+    }
+
+    public bool CheckItemReference(ItemInstance itemInstance)
+    {
+        return itemInstance == currentItemInstance;
     }
 }

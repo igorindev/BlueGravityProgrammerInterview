@@ -15,14 +15,19 @@ public class ItemsDataCollection : ScriptableObject
         return itemsData;
     }
 
+    public ItemData GetRandomItem()
+    {
+        return itemsData[Random.Range(0, itemsData.Length)];
+    }
+
 #if UNITY_EDITOR
     [Header("Collection Path")]
-    public string spritePath;
-    public string savePath;
-    public ItemData.ItemType itemType;
+    [SerializeField] string spritePath;
+    [SerializeField] string savePath;
+    [SerializeField] ItemData.ItemType itemType;
 
     [ContextMenu("Get All Items At Path")]
-    public void GetAllItems()
+    void GetAllItems()
     {
         for (int i = 0; i < itemsData.Length; i++)
         {

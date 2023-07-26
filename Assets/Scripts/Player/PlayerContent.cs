@@ -54,27 +54,55 @@ public class PlayerMoney
     }
 }
 
+public class ItemInstance
+{
+    public ItemData itemData;
+    public bool equipped;
+}
+
 public class PlayerInventory
 {
     Action<List<ItemData>> onInventoryUpdated;
 
+    readonly List<ItemInstance> items = new List<ItemInstance>(27);
+
     readonly List<ItemData> currentItems = new List<ItemData>(27);
-    public List<ItemData> CurrentItems => currentItems;
+    public List<ItemInstance> Items => items;
 
-    public PlayerInventory(List<ItemData> items)
+    public PlayerInventory(ItemData[] items)
     {
-        currentItems.AddRange(items);
+        for (int i = 0; i < items.Length; i++)
+        {
+            ItemData item = items[i];
+            ItemInstance itemInstance = new ItemInstance()
+            {
+                itemData = item,
+            };
+
+            AddItemToInventory(itemInstance);
+        }
     }
 
-    public void AddItemToInventory(ItemData itemData)
+    bool HasSlotAvailable()
     {
-        currentItems.Add(itemData);
-        onInventoryUpdated?.Invoke(currentItems);
+        return items.Count < items.Capacity;
     }
 
-    public void RemoveItemFromInventory(ItemData itemData)
+    public bool AddItemToInventory(ItemInstance itemInstance)
     {
-        currentItems.Remove(itemData);
+        if (HasSlotAvailable())
+        {
+            items.Add(itemInstance);
+            onInventoryUpdated?.Invoke(currentItems);
+            return true;
+        }
+
+        return false;
+    }
+
+    public void RemoveItemFromInventory(ItemInstance itemToRemove)
+    {
+        items.Remove(itemToRemove);
         onInventoryUpdated?.Invoke(currentItems);
     }
 }
