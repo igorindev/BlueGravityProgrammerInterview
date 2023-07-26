@@ -145,6 +145,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: EmptySprite
+      rect:
+        serializedVersion: 2
+        x: 1
+        y: 1
+        width: 1
+        height: 1
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 1622797387b7f1d4cab5874724087045
+      internalID: -649501989
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -157,6 +178,7 @@ TextureImporter:
     secondaryTextures: []
     nameFileIdTable:
       UI_1: -439540580
+      EmptySprite: -649501989
       UI_0: -354055446
   spritePackingTag: 
   pSDRemoveMatte: 0
