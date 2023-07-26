@@ -987,8 +987,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 300553285}
   m_HandleRect: {fileID: 300553284}
   m_Direction: 2
-  m_Value: 0.00000016142151
-  m_Size: 0.53208745
+  m_Value: 1
+  m_Size: 0.31583166
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -5741,7 +5741,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 5.0820923, y: 378.1104}
+  m_AnchoredPosition: {x: 5.0820923, y: 106581.805}
   m_SizeDelta: {x: -10.1641, y: 0}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &758936458
@@ -7238,7 +7238,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 032cec05217b56f429f2a2cc359d07e7, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.8
   m_Pitch: 1
   Loop: 1
   Mute: 0
@@ -26990,7 +26990,6 @@ MonoBehaviour:
   canvas: {fileID: 1474503789}
   closeButton: {fileID: 0}
   moneyValue: {fileID: 980389966}
-  dayTimeValue: {fileID: 0}
 --- !u!1 &1498512015
 GameObject:
   m_ObjectHideFlags: 0
@@ -46104,12 +46103,12 @@ MonoBehaviour:
     - Use the mouse to interact with NPCs
 
     - Get
-    close to them to be able to interact
+    closer to them to be able to interact
 
     - Buy and Sell items to the NPCs
 
     -
-    Equip items in the inventory'
+    Click in the inventory slots to equip items'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: aea89bea970467a4f84e99b8a87c5534, type: 2}
   m_sharedMaterial: {fileID: -9106059903969394108, guid: aea89bea970467a4f84e99b8a87c5534, type: 2}
