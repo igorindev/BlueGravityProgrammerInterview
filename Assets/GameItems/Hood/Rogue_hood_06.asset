@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemName: Rogue_hood_06
   itemSprite: {fileID: 21300000, guid: 20eb058aea3c3a744bb5d47a1610550a, type: 3}
-  itemCost: 50
-  itemType: 1
+  itemCost: 90
+  itemType: 2

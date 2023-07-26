@@ -36,6 +36,6 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 92400fe4590259446b7017137e72221f, type: 2}
   - {fileID: 11400000, guid: 869f87befb632a8498ba30143310a52c, type: 2}
   - {fileID: 11400000, guid: 90d8a76b53ccfbd4eb54304449045af6, type: 2}
-  spritePath: 
-  savePath: 
+  spritePath: Assets/GameItems/
+  savePath: Assets/GameItems/
   itemType: 0

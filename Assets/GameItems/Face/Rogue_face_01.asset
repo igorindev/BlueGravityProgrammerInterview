@@ -15,3 +15,4 @@ MonoBehaviour:
   itemName: Rogue_face_01
   itemSprite: {fileID: 21300000, guid: 518ab34707033904cb1d99dbfcc9f4bb, type: 3}
   itemCost: 50
+  itemType: 1
