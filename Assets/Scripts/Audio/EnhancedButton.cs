@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -10,11 +11,18 @@ public class EnhancedButton : Button
 {
     [SerializeField] AudioUIButtons.ButtonClick audioType;
 
-    protected override void Awake()
+    public override void OnPointerClick(PointerEventData eventData)
     {
-        base.Awake();
+        base.OnPointerClick(eventData);
 
-        onClick.AddListener(PlaySound);
+        PlaySound();
+    }
+
+    public override void OnSubmit(BaseEventData eventData)
+    {
+        base.OnSubmit(eventData);
+
+        PlaySound();
     }
 
     void PlaySound()
