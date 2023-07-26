@@ -54,7 +54,7 @@ public class GameManager : Singleton<GameManager>
 
     public void ShowShop(NpcShop npcShop, List<ItemInstance> shopItems)
     {
-        shopUI.SetupShopUI(npcShop, shopItems);
+        shopUI.SetupShopUI(npcShop, shopItems, inventoryUI);
         shopUI.PresentUICanvas(RestorePlayerInput);
         DisablePlayerInput();
     }

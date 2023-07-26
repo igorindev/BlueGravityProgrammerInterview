@@ -8,21 +8,23 @@ public class CharacterCustomization : MonoBehaviour
     [SerializeField] Outfit pelvis;
     [SerializeField] Outfit torso;
 
-    public void SetFace(Sprite sprite)
+    public void SetOutfit(ItemData.ItemType itemDataType, Sprite newSprite)
     {
-        face.Replace(sprite);
-    }
-    public void SetHood(Sprite sprite)
-    {
-        hood.Replace(sprite);
-    }
-    public void SetPelvis(Sprite sprite)
-    {
-        pelvis.Replace(sprite);
-    }
-    public void SetTorso(Sprite sprite)
-    {
-        torso.Replace(sprite);
+        switch (itemDataType)
+        {
+            case ItemData.ItemType.Face:
+                face.Replace(newSprite);
+                break;
+            case ItemData.ItemType.Hood:
+                hood.Replace(newSprite);
+                break;
+            case ItemData.ItemType.Pelvis:
+                pelvis.Replace(newSprite);
+                break;
+            case ItemData.ItemType.Torso:
+                torso.Replace(newSprite);
+                break;
+        }
     }
 }
 
